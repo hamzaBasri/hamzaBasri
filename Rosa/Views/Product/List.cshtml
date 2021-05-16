@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "List";
+}
+
+
+<h2>Liste</h2>
+<table id="products_id" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>TypeId</th>
+            <th>ProductTypeName</th>
+            <th>Image</th>
+            <th>CreationDate</th>
+            <th>ProductTypeName</th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $('#products_id').DataTable({
+                ajax: '/api/Product/List' ,
+                columns: [
+                    { data: "id" },
+                    { data: "name" },
+                    { data: "description" },
+                    { data: "typeId" },
+                    { data: "productTypeName" },
+                    { data: "image" },
+                    { data: "creationDate" },
+                    { data: "ProductTypeName" },
+
+                ]
+            });
+        });
+    </script>
+
+
+}
+
+
+
