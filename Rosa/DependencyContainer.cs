@@ -21,7 +21,8 @@ namespace Rosa
             services.AddScoped<IProductPropertyDal, ProductPropertyDal>();
             services.AddScoped<IOrderBLL, OrderBLL>();
             services.AddScoped<IOrderDal, OrderDal>();
-
+            services.AddScoped<ICarouselBLL, CarouselBLL>();
+            services.AddScoped<ICarouselDal, CarouselDal>();
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Rosa.ViewModels
 {
     public class HomeViewModel
     {
-        public IEnumerable<Product> Products  { get; set; }
+
+        public IEnumerable<CarouselListViewModel> Carousels { get; set; }
+        public IEnumerable<ProductListViewModel> Products  { get; set; }
     }
 }

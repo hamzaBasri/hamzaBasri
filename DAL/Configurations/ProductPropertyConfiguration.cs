@@ -15,7 +15,7 @@ namespace DAL.Configurations
             builder.HasKey(pp => new { pp.ProductId, pp.PropertyId });
             builder.HasOne(pp => pp.Product).WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.ProductId);
             builder.HasOne(pp => pp.Property).WithMany(p => p.ProductProperties).HasForeignKey(pp => pp.PropertyId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(pp => pp.Option).WithMany().HasForeignKey(pp => pp.OptionId);
+            builder.HasOne(pp => pp.Option).WithMany().HasForeignKey(pp => pp.OptionId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

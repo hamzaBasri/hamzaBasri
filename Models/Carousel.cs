@@ -7,6 +7,9 @@ namespace Models
     public class Carousel
     {
         public int Id { get; set; }
-        public string Path { get; set; }
+        public string ImageUrl { get; set; }
+        public bool IsActive { get; set; } = true;
+        public string Title { get; set; }
+        public string Description { get; set; }
     }
 }

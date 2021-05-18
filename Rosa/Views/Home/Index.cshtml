@@ -3,8 +3,8 @@
 }
 
 
+@*<partial name="SliderPartial" />*@
 <partial name="SearchPartial" />
-
 @model Rosa.ViewModels.HomeViewModel
 <div class="container">
     <div class="row">
@@ -12,7 +12,7 @@
         {
             <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                 <div class="card">
-                    <img class="card-img" src="@modelProduct.Image" alt="Vans" style="height:20rem;object-fit:cover">
+                    <img class="card-img" src="@modelProduct.ImageUrl" alt="Vans" style="height:20rem;object-fit:cover">
 
                     <div class="card-body" style="font-size:20px">
                         <h4 class="card-title">@modelProduct.Name</h4>
@@ -21,7 +21,7 @@
                             @modelProduct.Description
                         </p>
                         <div class="buy d-flex justify-content-between align-items-center">
-                            <div class="price text-success"><h5 class="mt-4">$@modelProduct.Type
+                            <div class="price text-success"><h5 class="mt-4">$@modelProduct.ProductTypeName
                                   </h5></div>
                             <a href="#" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                         </div>
@@ -47,11 +47,11 @@
         padding-top: 50px;
         padding-bottom: 20px;
         /*background-image: url('images/background2.jfif');*/
-        background-image: url('file:///C:\ProjectMe2\Rosa\Rosa\wwwroot\images\duck_cookies_field.png');
-        background-size: cover;
-        background-color: aquamarine;*/
+       /* background-image: url('file:///C:\ProjectMe2\Rosa\Rosa\wwwroot\images\duck_cookies_field.png');*/
+        /*background-size: cover;
+        background-color: aquamarine;
         background-position: center center;
-        background-repeat: no-repeat;
+        background-repeat: no-repeat;*/
         margin: auto;
     }
     img {
