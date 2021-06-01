@@ -5,13 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\upload\**" />
+    <Content Remove="wwwroot\upload\**" />
+    <EmbeddedResource Remove="wwwroot\upload\**" />
+    <None Remove="wwwroot\upload\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\upload\images\Logo.jpg" />
+    <Content Include="wwwroot\upload\images\Logo-White.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.6.0" />
     <PackageReference Include="GridMvcCore" Version="4.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
@@ -21,40 +33,6 @@
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="wwwroot\upload\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="wwwroot\upload\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="wwwroot\upload\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\upload\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\1.jpeg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\10.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\11.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\12.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\13.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\14.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\15.jpeg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\16.jpeg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\2.jpeg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\3.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\4.jpeg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\5.jpeg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\6.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\7.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\8.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\9.jpg" />
-    <_ContentIncludedByDefault Remove="wwwroot\upload\Images\Logo.jpg" />
-  </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties wwwroot_4lib_4jquery_4dist_4jquery_1min_1map__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -3,17 +3,18 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using System;
 using System.Collections.Generic;
-
 using System.Linq;
 using System.Text;
 
 namespace DAL.DataAccessLayers
 {
-    public class ProductPropertyDal : BaseDal<Property>, IProductPropertyDal
+    public class OrderItemDal : BaseDal<OrderItem>, IOrderItemDal
     {
-        public ProductPropertyDal(DB db) : base(db)
+        public OrderItemDal(DB db) : base(db)
         {
         }
-        public Property GetById(int id) => DbSet.AsNoTracking().FirstOrDefault(p => p.Id == id);
+        public OrderItem GetById(int id) => DbSet.AsNoTracking().FirstOrDefault(p => p.Id == id);
+
+        
     }
 }

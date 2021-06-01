@@ -19,12 +19,10 @@ namespace Rosa.Controllers.api
             _productBLL = productBLL;
         }
 
-        public ActionResult<List<ProductEditViewModel>> List()
+        public List<ProductListViewModel> List()
         {
             var productVMs = _productBLL.GetAll().Select(ProductListViewModel.FromModel).ToList();
-
-            return Ok(new { data = productVMs});
-
+            return productVMs;
         }
         
         

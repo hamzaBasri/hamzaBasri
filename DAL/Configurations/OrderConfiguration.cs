@@ -13,7 +13,7 @@ namespace DAL.Configurations
         {
             builder.ToTable("Order");
             builder.HasKey(o => o.Id);
-            builder.Property(o => o.Description).HasMaxLength(100).IsRequired();
+           
             
             
         }

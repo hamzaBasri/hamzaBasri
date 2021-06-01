@@ -12,5 +12,6 @@ namespace BLL.interfaces
         void DeleteById(int id);
         IEnumerable<Product> GetAllIncludingType();
         Product GetByIdIncludingAll(int id);
+        Product GetByid(int id);
     }
 }

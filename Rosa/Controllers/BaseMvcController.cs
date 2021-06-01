@@ -25,7 +25,7 @@ namespace Rosa.Controllers
             if (file == null)
                 return null;
 
-            string filePathToSave = Path.Combine("images", $"{Guid.NewGuid()}_{file.FileName}");
+            string filePathToSave = Path.Combine("upload","images", $"{Guid.NewGuid()}_{file.FileName}");
             FileInfo fileInfo = new FileInfo(Path.Combine(_env.WebRootPath, filePathToSave));
 
             if (!fileInfo.Directory.Exists)
@@ -36,7 +36,7 @@ namespace Rosa.Controllers
                 file.CopyTo(fileStream);
             }
 
-            return filePathToSave;
+            return filePathToSave.Replace(@"\", "/");
         }
 
     }

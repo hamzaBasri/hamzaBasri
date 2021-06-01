@@ -4,14 +4,16 @@ using DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20210518151919_AddOrderToCarousel")]
+    partial class AddOrderToCarousel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,11 +64,19 @@ namespace DAL.Migrations
                     b.Property<string>("CustumerEmail")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("RequestedImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -74,24 +84,6 @@ namespace DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("Models.OrderItem", b =>
-                {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("Models.Product", b =>
@@ -123,6 +115,21 @@ namespace DAL.Migrations
                     b.HasIndex("TypeId");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("Models.ProductOrder", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductOrder");
                 });
 
             modelBuilder.Entity("Models.ProductProperty", b =>
@@ -207,10 +214,21 @@ namespace DAL.Migrations
                     b.ToTable("PropertyOption");
                 });
 
-            modelBuilder.Entity("Models.OrderItem", b =>
+            modelBuilder.Entity("Models.Product", b =>
+                {
+                    b.HasOne("Models.ProductType", "Type")
+                        .WithMany("Products")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("Models.ProductOrder", b =>
                 {
                     b.HasOne("Models.Order", "Order")
-                        .WithMany("OrderItems")
+                        .WithMany("ProductOrders")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -224,17 +242,6 @@ namespace DAL.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Models.Product", b =>
-                {
-                    b.HasOne("Models.ProductType", "Type")
-                        .WithMany("Products")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("Models.ProductProperty", b =>
@@ -288,7 +295,7 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("Models.Order", b =>
                 {
-                    b.Navigation("OrderItems");
+                    b.Navigation("ProductOrders");
                 });
 
             modelBuilder.Entity("Models.Product", b =>

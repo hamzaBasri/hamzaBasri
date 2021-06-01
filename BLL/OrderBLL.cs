@@ -1,11 +1,8 @@
 ﻿using BLL.Interfaces;
 using DAL.DataAccessLayers.Interfaces;
 using Models;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 
 namespace BLL
 {
@@ -24,11 +21,7 @@ namespace BLL
         }
         public void Save(Order order)
         {
-            if (order.ShoudBeCreated)
-
-                _orderDal.Create(order);
-
-            else
+            
 
                 _orderDal.Update(order);
 

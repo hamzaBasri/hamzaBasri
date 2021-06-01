@@ -19,10 +19,11 @@ namespace DAL
         public DbSet<ProductType> ProductTypes { get; set; }
         public DbSet<ProductProperty> ProductPropertys { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ProductOrder> ProductOrders { get; set; }
+        public DbSet<Models.OrderItem> ProductOrders { get; set; }
         public DbSet<Models.Property> Propertys { get; set; }
         public DbSet<PropertyOption> PropertyOptions { get; set; }
         public DbSet<Carousel> Carousels { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
 
 

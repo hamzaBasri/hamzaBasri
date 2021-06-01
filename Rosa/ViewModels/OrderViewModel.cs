@@ -18,6 +18,7 @@ namespace Rosa.ViewModels
         public DateTime OrderDate { get; set; }
         public string Address { get; set; }
 
+
         public static List<OrderViewModel> FromModels(IEnumerable<Order> orders)
             => orders.Select(FromModel).ToList();
 
@@ -26,7 +27,7 @@ namespace Rosa.ViewModels
             Id = o.Id,           
             Price = o.Price,
             CustumerEmail = o.CustumerEmail,
-            Description = o.Description,
+           
             OrderDate = o.OrderDate,
             Address = o.Address,
            
@@ -38,7 +39,7 @@ namespace Rosa.ViewModels
             Id = Id,           
             Price = Price,
             CustumerEmail = CustumerEmail,
-            Description = Description,
+            
             OrderDate = OrderDate,
             Address = Address
         };

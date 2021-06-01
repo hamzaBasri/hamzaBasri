@@ -18,11 +18,11 @@ namespace BLL
         }
         public IEnumerable<Carousel> GetAll()
         {
-            return _carouselDal.GetAll();
+            return _carouselDal.GetAll().OrderBy(c => c.Order);
         }
         public IEnumerable<Carousel> GetAllActive()
         {
-            return _carouselDal.GetAll().Where(c => c.IsActive);
+            return _carouselDal.GetAll().Where(c => c.IsActive).OrderBy(c => c.Order);
         }
         public void Delete(Carousel carousel)
         {
@@ -34,6 +34,7 @@ namespace BLL
         public void ToggleIsActive(Carousel carousel)
         {
             carousel.IsActive = !carousel.IsActive;
+
             Save(carousel);
         }
 
@@ -41,12 +42,15 @@ namespace BLL
         {
             if (carousel.Id <= 0)
             {
+                carousel.Order = GetLastOrder()+1;
                 _carouselDal.Create(carousel);
             }
             else
                _carouselDal.Update(carousel);
         }
 
-       
+        private int GetLastOrder() => _carouselDal.GetAll().Max(c => c.Order);
+
+
     }
 }

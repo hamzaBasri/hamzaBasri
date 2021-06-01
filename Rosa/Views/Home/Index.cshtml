@@ -3,30 +3,38 @@
 }
 
 
-@*<partial name="SliderPartial" />*@
+
 <partial name="SearchPartial" />
+<partial name="SliderPartial" model="@Model.Carousels" />
+
 @model Rosa.ViewModels.HomeViewModel
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         @foreach (var modelProduct in Model.Products)
         {
-            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4" style="width: 50%; width : 60%">
                 <div class="card">
-                    <img class="card-img" src="@modelProduct.ImageUrl" alt="Vans" style="height:20rem;object-fit:cover">
-
-                    <div class="card-body" style="font-size:20px">
-                        <h4 class="card-title">@modelProduct.Name</h4>
-                        <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
-                        <p class="card-text" style="height:5rem; text-wrap:normal">
-                            @modelProduct.Description
-                        </p>
-                        <div class="buy d-flex justify-content-between align-items-center">
-                            <div class="price text-success"><h5 class="mt-4">$@modelProduct.ProductTypeName
-                                  </h5></div>
-                            <a href="#" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    <a href="@Url.Action("ProductShow", "Product",new { id = modelProduct.Id })">
+                        @*<a href="@Html.ActionLink("ProductShow", "Product",new { id = modelProduct.Id })">*@
+                            <img class="card-img" src="@modelProduct.ImageUrl" alt="Vans" style="height:38rem;object-fit:cover">
+                        </a>
+                        <div class="card-body" style="font-size:20px">
+                            <h4 class="card-title">@modelProduct.Name</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">Style: VA33TXRJ5</h6>
+                            <p class="card-text" style="height:5rem; text-wrap:normal">
+                                @modelProduct.Description
+                            </p>
+                            <div class="buy d-flex justify-content-between align-items-center">
+                                <div class="price text-success">
+                                    <h5 class="mt-4">
+                                        $@modelProduct.ProductTypeName
+                                    </h5>
+                                </div>
+                                @*<a href="#" class="btn btn-danger mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>*@
+                                <partial name="OrderModalPartial" />
+                            </div>
                         </div>
-                    </div>
-                </div>
+</div>
             </div>
 
 

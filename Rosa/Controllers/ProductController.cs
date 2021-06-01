@@ -80,7 +80,15 @@ namespace Rosa.Controllers
 
 
         }
-
+        [Route("/product/{id}")]
+        public IActionResult ProductShow(int id)
+        {
+            //var productVM = new ProductShowViewModel();
+            //var productTypes = _productTypeBLL.GetAll();
+            var product = _productBLL.GetByid(id);
+            var productVM = ProductShowViewModel.FromModel(product);
+            return View(productVM);
+        }
 
     }
 }

@@ -23,6 +23,9 @@ namespace Rosa
             services.AddScoped<IOrderDal, OrderDal>();
             services.AddScoped<ICarouselBLL, CarouselBLL>();
             services.AddScoped<ICarouselDal, CarouselDal>();
+            services.AddScoped<IOrderItemBLL, OrderItemBLL>();
+            services.AddScoped<IOrderItemDal, OrderItemDal>();
+
         }
     }
 }

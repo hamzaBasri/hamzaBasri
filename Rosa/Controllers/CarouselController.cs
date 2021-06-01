@@ -33,26 +33,30 @@ namespace Rosa.Controllers
             return RedirectToAction("List");
         }
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
-            var carouselVM = new CarouselListViewModel();
+            var carouselVM = new CarouselEditViewModel();
 
-
-            var carousel = _carouselBLL.GetByid(id);
-            carouselVM = CarouselListViewModel.FromModel(carousel);
-
+            if (id.HasValue)
+            {
+                var carousel = _carouselBLL.GetByid(id.Value);
+                carouselVM = CarouselEditViewModel.FromModel(carousel);
+            }
+            
             ViewData["Title"] = carouselVM.IsCreateMode ? "Create" : "Update";
             return View(carouselVM);
         }
-        public IActionResult Save(CarouselListViewModel carouselVM)
+        public IActionResult Save(CarouselEditViewModel carouselVM)
         {
             var carousel = carouselVM.ToModel();
-            carousel.ImageUrl = UploadImage(carouselVM.ImageUrl);
+            if (carouselVM.Image != null)
+                carousel.ImageUrl = UploadImage(carouselVM.Image);
+
             _carouselBLL.Save(carousel);
             SetMessage($"Carousel Id {carousel.Id} Saved Succesfuly");
             return RedirectToAction("List");
         }
-        
+
 
 
     }
