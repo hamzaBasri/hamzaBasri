@@ -15,6 +15,7 @@ namespace Models
         public ProductType Type { get; set; }
         public string Image { get; set; }
         public DateTime CreationDate { get; set; }
+        public decimal Price { get; set; }
         public bool ShoudBeCreated => Id <= 0;
         public ICollection<ProductProperty> ProductProperties { get; set; }
 

@@ -36,7 +36,7 @@ namespace Rosa.Controllers
                 file.CopyTo(fileStream);
             }
 
-            return filePathToSave.Replace(@"\", "/");
+            return $"/{filePathToSave.Replace(@"\", "/")}" ;
         }
 
     }

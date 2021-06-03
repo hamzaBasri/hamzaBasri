@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rosa.ViewModels
 {
-    public class ProductPropertyViewModel
+    public class PropertyViewModel
     {
 
 
@@ -16,11 +16,13 @@ namespace Rosa.ViewModels
         public decimal? Cost { get; set; }
         public int OptionId { get; set; }
         public bool HasCost => Cost > 0;
-    
+        public  List<PropertyOptionViewModel> Options { get; set; }
+        public bool HasMultipleOptions => Options?.Count > 1;
 
-       public static ProductPropertyViewModel FromModel(ProductProperty pp)
+
+        public static PropertyViewModel FromModel(ProductProperty pp)
         {
-            return new ProductPropertyViewModel();
+            return new PropertyViewModel();
         }
 
     }

@@ -23,6 +23,6 @@ namespace Rosa.ViewModels
         public IFormFile Image { get; set; }
         public DateTime CreationDate { get; set; }
         public List<SelectListItem> TypesSelectItems { get; set; }
-        public List<ProductPropertyViewModel> Properties { get; set; } = new List<ProductPropertyViewModel>();
+        public List<PropertyViewModel> Properties { get; set; } = new List<PropertyViewModel>();
     }
 }

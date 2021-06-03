@@ -24,7 +24,7 @@ namespace Rosa.ViewModels
         public IFormFile Image { get; set; }
         public DateTime CreationDate { get; set; }
         public List<SelectListItem> TypesSelectItems { get; set; }
-        public List<ProductPropertyViewModel> Properties { get; set; } = new List<ProductPropertyViewModel>();
+        public List<PropertyViewModel> Properties { get; set; } = new List<PropertyViewModel>();
         public bool IsCreateMode => Id <= 0;
        
 
@@ -41,7 +41,7 @@ namespace Rosa.ViewModels
                 CreationDate = p.CreationDate,
                 ImageUrl = p.Image,
                 ProductTypeName = p.Type?.Name,
-                Properties = p.ProductProperties.Select(pp => new ProductPropertyViewModel
+                Properties = p.ProductProperties.Select(pp => new PropertyViewModel
                 {
                     //Cost = pp.Cost,
                     PropertyId = pp.PropertyId,

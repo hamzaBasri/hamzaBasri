@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,8 +19,10 @@ namespace Rosa.ViewModels
         public string ImageUrl { get; set; }
         public IFormFile Image { get; set; }
         public DateTime CreationDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public decimal Price { get; set; }
         public List<SelectListItem> TypesSelectItems { get; set; }
-        public List<ProductPropertyViewModel> Properties { get; set; } = new List<ProductPropertyViewModel>();
+        public List<PropertyViewModel> Properties { get; set; } = new List<PropertyViewModel>();
         public static ProductShowViewModel FromModel(Product p) => new ProductShowViewModel
         {
             Id = p.Id,
@@ -29,7 +32,11 @@ namespace Rosa.ViewModels
             CreationDate = p.CreationDate,
             ImageUrl = p.Image,
             ProductTypeName = p.Type?.Name,
+            Price = p.Price,
+            Properties = p.Type.Properties.Select(p => new PropertyViewModel
+            {
 
+            }).ToList()
         };
       
     }
