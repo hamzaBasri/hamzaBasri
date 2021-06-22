@@ -5,23 +5,180 @@
 }
 
 
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <img src="@Model.ImageUrl" class="img-fluid" alt="" >
+@section Head{ 
+    <style>
+        .price > span {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .price >  span::before{
+            content: "Price: ";
+            font-size: 30px;
+            color:darkgray;
+        }
+    </style>
+}
+
+
+<form action="/" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <img src="@Model.ImageUrl" class="img-fluid" alt="">
+            </div>
+            <div class="col-6">
+                <h1>@Model.Name</h1>
+                <h3>
+                    @Html.DisplayFor(model => model.Price)
+                </h3>
+                <h3>
+                    @foreach (var p in Model.Properties)
+                    {
+                        <div>
+                            @p.Name
+                        </div>
+                        <div id="propertyOptionsForProperty_@p.Id" class="row">
+                            @foreach (var po in p.Options)
+                            {
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="propertyOption_@po.Id" name="@p.Name" class="custom-control-input" value="@po.Id" onclick="calculatePrice(@p.Id,@po.Id,@po.Cost)">
+                                    <label class="custom-control-label" for="propertyOption_@po.Id">@po.Text</label>
+                                </div>
+                            }
+                        </div>
+
+                    }
+
+                </h3>
+
+                <div class="price">
+                    <span>
+
+                    </span>
+                </div>
+                <div>
+                    <input type="button" onclick="AddToOrder" value="Add To Card"/>
+                </div>
+
+            </div>
         </div>
-        <div class="col-6">
-            <h1>@Model.Name</h1>
-            <h3>
-                @Html.DisplayFor(model => model.Price)
-            </h3>
 
-        </div>      
-    </div> 
+    </div>
 
-</div>
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        <a asp-action="Index">Back to List</a>
+    </div>
 
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+</form>
+
+@section scripts{
+
+    <script>
+
+        function AddToOrder() {
+
+            var addToOrderObj = {
+                ProductId: @Model.Id,
+                Properties: properties.map(p => (
+                    {
+                        propertyId: p.id,
+                        optionId: p.optionId
+                    }
+                ))
+        };
+            console.log(addToOrderObj);
+
+
+        }
+        
+
+        var properties = [];
+
+        function calculatePrice(propertyId, optionId, price) {
+            var property = properties.find(pp => pp.id == propertyId);
+            if (!property)
+                properties.push({ id: propertyId, price: price, optionId: optionId });
+            else {
+                property.price = price;
+                property.optionId = optionId;
+            }
+
+
+            var price = properties.reduce((prevPrice, newProperty) => prevPrice + newProperty.price, 0);
+
+
+            var formatter = new Intl.NumberFormat('en-US',
+                {
+                    style: 'currency',
+                    currency: 'USD',
+                });
+
+
+            document.querySelector("div.price>span").innerText = formatter.format(price);
+            setToUrl();
+        }
+
+        (function() {
+            var urlProperties = getPropertiesFromUrl();
+
+            urlProperties.forEach(p => {
+                var input = document.querySelector(`#propertyOptionsForProperty_${p.id} input#propertyOption_${p.optionId}`);
+                input.checked = true;
+                input.onclick();
+            });
+
+            document.querySelectorAll('[id^=propertyOptionsForProperty_').forEach(element => {
+                var propertyId = parseInt(element.id.split('_')[1]);
+                if (urlProperties.some(p => p.id === propertyId))
+                    return;
+
+
+                var input = element.querySelector('input');
+                input.checked = true;
+                input.onclick();
+            })
+
+        })();
+
+
+        function setToUrl() {
+
+            var urlProperties = properties.map(p => {
+                var propertyIdEncoded = Base64.fromInt(p.id);
+                var optionIdEncoded = Base64.fromInt(p.optionId);
+                return propertyIdEncoded + "." + optionIdEncoded;
+            });
+
+            var test = urlProperties.reduce((preValue, newValue) => `${preValue}.${newValue}`, getProductIdFromUrl());
+            window.history.replaceState(null, null, test);
+        }
+
+        function getProductIdFromUrl() {
+            return getProductPartsFromUrl()[0];
+        }
+
+        function getPropertiesFromUrl() {
+            var urlProps = getProductPartsFromUrl().splice(1);
+            props = [];
+            for (var i = 0; i < urlProps.length; i = i + 2) {
+                props.push({ id: Base64.toInt(urlProps[i]), optionId: Base64.toInt(urlProps[i + 1]) });
+            }
+            return props;
+        }
+
+        function getProductPartsFromUrl() {
+            return getAnythingFromUrlAfterLastSlash().split(".");
+        }
+
+        function getAnythingFromUrlAfterLastSlash() {
+            var pathSplitted = window.location.pathname.split('/');
+            return pathSplitted[pathSplitted.length - 1];
+        }
+
+
+    </script>
+
+}

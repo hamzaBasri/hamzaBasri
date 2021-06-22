@@ -26,8 +26,7 @@ namespace Rosa.ViewModels
         {
             Id = o.Id,           
             Price = o.Price,
-            CustumerEmail = o.CustumerEmail,
-           
+            CustumerEmail = o.CustumerEmail,           
             OrderDate = o.OrderDate,
             Address = o.Address,
            

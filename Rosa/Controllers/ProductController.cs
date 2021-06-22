@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
+using Rosa.Extentions;
 using Rosa.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using static Rosa.Extentions.MyEncoder;
 
 namespace Rosa.Controllers
 {
@@ -76,19 +78,16 @@ namespace Rosa.Controllers
             SetMessage($"Product Id {id} Deleted Succesfuly");
 
             return RedirectToAction("Liste");
-
-
-
         }
-        [Route("/product/{id}")]
-        public IActionResult ProductShow(int id)
+        [Route("/product/{code}")]
+        public IActionResult ProductShow(string code)
         {
             //var productVM = new ProductShowViewModel();
             //var productTypes = _productTypeBLL.GetAll();
-            var product = _productBLL.GetByid(id);
+            var productId = code.Split('.').First().DecodeToInt();
+            var product = _productBLL.GetByIdIncludingAll(productId);
             var productVM = ProductShowViewModel.FromModel(product);
             return View(productVM);
         }
-
     }
 }

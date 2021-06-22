@@ -10,19 +10,26 @@ namespace Rosa.ViewModels
     {
 
 
-        public int PropertyId { get; set; }
-        public string PropertyName { get; set; }
-        public string PropertyValue { get; set; }
-        public decimal? Cost { get; set; }
-        public int OptionId { get; set; }
-        public bool HasCost => Cost > 0;
-        public  List<PropertyOptionViewModel> Options { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        //public string PropertyValue { get; set; }
+        //public decimal? Cost { get; set; }
+        public int SelectedOptionId { get; set; }
+
+        //public bool HasCost => Cost > 0;
+        public List<PropertyOptionViewModel> Options { get; set; }
         public bool HasMultipleOptions => Options?.Count > 1;
 
 
-        public static PropertyViewModel FromModel(ProductProperty pp)
+        public static PropertyViewModel FromModel(Property pp)
         {
-            return new PropertyViewModel();
+            return
+                new PropertyViewModel
+                {
+                    Id = pp.Id,
+                    Name = pp.Name,
+                    Options = pp.Options.Select(PropertyOptionViewModel.FromModel).ToList()
+                };
         }
 
     }

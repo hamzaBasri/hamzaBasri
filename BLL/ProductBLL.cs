@@ -27,7 +27,14 @@ namespace BLL
 
 
         public IEnumerable<Product> GetAllIncludingType() => _getAll.Include(p => p.Type).ToList();
-        public Product GetByIdIncludingAll(int id) => _getAll.Include(p => p.Type).Include(p => p.ProductProperties).ThenInclude(pp => pp.Property).FirstOrDefault(p =>p.Id == id);
+
+        //TODO:Needs To Be Optimized
+        public Product GetByIdIncludingAll(int id) =>
+            _getAll
+            .Include(p => p.Type)
+            .ThenInclude(t => t.Properties)           
+            .ThenInclude(p => p.Options)
+            .FirstOrDefault(p =>p.Id == id);
 
         public Product GetByid(int id) => _productDal.GetById(id);
 

@@ -14,7 +14,7 @@
         {
             <div class="col-12 col-sm-8 col-md-6 col-lg-4" style="width: 50%; width : 60%">
                 <div class="card">
-                    <a href="@Url.Action("ProductShow", "Product",new { id = modelProduct.Id })">
+                    <a href="@Url.Action("ProductShow", "Product",new { code = modelProduct.Code })">
                         @*<a href="@Html.ActionLink("ProductShow", "Product",new { id = modelProduct.Id })">*@
                             <img class="card-img" src="@modelProduct.ImageUrl" alt="Vans" style="height:38rem;object-fit:cover">
                         </a>
@@ -54,12 +54,6 @@
     .container {
         padding-top: 50px;
         padding-bottom: 20px;
-        /*background-image: url('images/background2.jfif');*/
-       /* background-image: url('file:///C:\ProjectMe2\Rosa\Rosa\wwwroot\images\duck_cookies_field.png');*/
-        /*background-size: cover;
-        background-color: aquamarine;
-        background-position: center center;
-        background-repeat: no-repeat;*/
         margin: auto;
     }
     img {

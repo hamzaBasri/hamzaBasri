@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
+using Rosa.Extentions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Rosa.ViewModels
     public class ProductListViewModel
     {
         public int Id { get; set; }
+        public string Code => Id.EncodeFromInt();
         public string Name { get; set; }
         public string Description { get; set; }
         

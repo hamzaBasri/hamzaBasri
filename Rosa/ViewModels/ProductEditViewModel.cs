@@ -30,8 +30,7 @@ namespace Rosa.ViewModels
 
         public static ProductEditViewModel FromModel(Product p, IEnumerable<ProductType> productTypes)
         {
-
-
+            //TODO: ProductProperties should be removed
             var productVM = p != null ? new ProductEditViewModel
             {
                 Id = p.Id,
@@ -41,14 +40,6 @@ namespace Rosa.ViewModels
                 CreationDate = p.CreationDate,
                 ImageUrl = p.Image,
                 ProductTypeName = p.Type?.Name,
-                Properties = p.ProductProperties.Select(pp => new PropertyViewModel
-                {
-                    //Cost = pp.Cost,
-                    PropertyId = pp.PropertyId,
-                    PropertyName = pp.Property.Name
-                    //PropertyValue = pp.Value
-                }
-            ).ToList()
         }: new ProductEditViewModel();
 
 

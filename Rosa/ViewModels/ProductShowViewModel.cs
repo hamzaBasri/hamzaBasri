@@ -33,10 +33,7 @@ namespace Rosa.ViewModels
             ImageUrl = p.Image,
             ProductTypeName = p.Type?.Name,
             Price = p.Price,
-            Properties = p.Type.Properties.Select(p => new PropertyViewModel
-            {
-
-            }).ToList()
+            Properties = p.Type.Properties.Select(PropertyViewModel.FromModel).ToList()
         };
       
     }
